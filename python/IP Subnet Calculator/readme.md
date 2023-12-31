@@ -19,4 +19,4 @@ This is a Python script for calculating IP subnets. It supports both IPv4 and IP
 Run the script with Python 3:
 
 ```bash
-python3 "IP subnet calculator.py"
+python3 "ipcalc.py"
