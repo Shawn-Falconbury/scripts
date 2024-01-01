@@ -16,10 +16,15 @@ adduser $USERNAME
 usermod -aG sudo $USERNAME
 
 # Make directories in the user's home folder
-su - $USERNAME -c "mkdir -p ~/bin ~/logs ~/logs/update"
+mkdir -p /home/$USERNAME/bin /home/$USERNAME/logs /home/$USERNAME/logs/update
+
+# Change ownership of the directories
+chown -R $USERNAME:$USERNAME /home/$USERNAME/bin /home/$USERNAME/logs
 
 # Create and make executable shell scripts in user's bin directory
-su - $USERNAME -c "touch ~/bin/update.sh ~/bin/startup.sh && chmod +x ~/bin/update.sh ~/bin/startup.sh"
+touch /home/$USERNAME/bin/update.sh /home/$USERNAME/bin/startup.sh
+chmod +x /home/$USERNAME/bin/update.sh /home/$USERNAME/bin/startup.sh
+chown $USERNAME:$USERNAME /home/$USERNAME/bin/update.sh /home/$USERNAME/bin/startup.sh
 
 # Update package list
 apt update
@@ -47,4 +52,3 @@ curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.
 apt-get install -y speedtest
 
 echo "Setup completed for $USERNAME!"
-
